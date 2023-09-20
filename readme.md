@@ -1,4 +1,5 @@
 # Falling Ducks
+A browser 3D game created using Three.js
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
