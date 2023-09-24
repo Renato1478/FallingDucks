@@ -1,6 +1,5 @@
 import Experience from "../Experience.js";
 import Environment from "./Environment.js";
-import Floor from "./Floor.js";
 import Duck from "./Duck.js";
 
 export default class World {
@@ -12,7 +11,6 @@ export default class World {
     // Wait for resources
     this.resources.on("ready", () => {
       // Setup
-      this.floor = new Floor();
       this.duck = new Duck();
       this.environment = new Environment();
     });
