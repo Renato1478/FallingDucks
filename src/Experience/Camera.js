@@ -23,18 +23,24 @@ export default class Camera {
       100
     );
     // camera position
-    this.instance.position.set(17, 9, 14.6);
+    this.instance.position.set(
+      18.824752835704036,
+      6.187407931691524,
+      12.176794810938253
+    );
     // camera quaterions
     this.instance.setRotationFromQuaternion(
       new THREE.Quaternion(
-        -0.17248146869199682,
-        0.40952445739887816,
-        0.07915730911874722,
-        0.8923418527465162
+        -0.1747399215527249,
+        0.42113637184974045,
+        0.08304644291451876,
+        0.8861226802425441
       )
     );
     // zoom
     this.instance.zoom = 80;
+    // far camera
+    this.instance.far = 45;
     // need this update in order to work
     this.instance.updateProjectionMatrix();
 
@@ -51,13 +57,13 @@ export default class Camera {
     // Rotate
     // this.controls.maxAzimuthAngle = Math.PI;
     // this.controls.minAzimuthAngle = Math.PI;
-    this.controls.enablePan = false;
+    // this.controls.enablePan = false;
 
-    this.controls.mouseButtons = {
-      LEFT: THREE.MOUSE.ROTATE,
-      MIDDLE: THREE.MOUSE.DOLLY,
-      RIGHT: THREE.MOUSE.ROTATE,
-    };
+    // this.controls.mouseButtons = {
+    //   LEFT: THREE.MOUSE.ROTATE,
+    //   MIDDLE: THREE.MOUSE.DOLLY,
+    //   RIGHT: THREE.MOUSE.ROTATE,
+    // };
     this.controls.rotateSpeed = 0.05;
   }
 
@@ -72,5 +78,8 @@ export default class Camera {
 
   update() {
     this.controls.update();
+
+    // console.log(this.instance.position);
+    // console.log(this.instance.quaternion);
   }
 }

@@ -1,6 +1,7 @@
 import Experience from "../Experience.js";
 import Environment from "./Environment.js";
 import Duck from "./Duck.js";
+import Intro from "../Intro.js";
 
 export default class World {
   constructor() {

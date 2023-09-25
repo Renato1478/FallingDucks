@@ -20,22 +20,25 @@ export default class Environment {
     this.setAmbientLight();
     this.setSunLight();
     this.setEnvironmentMap();
+    this.setFog();
   }
 
   setModel() {
     this.model = this.resource.scene;
-    this.scene.add(this.model);
+    this.scene.add(this.model); // "Little Farm House" (https://skfb.ly/oAr9O) by HugoMFerreira is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
     this.model.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        child.castShadow = true;
+        if (!["Waterfall", "Water001", "Water002"].includes(child.name)) {
+          child.castShadow = true;
+        }
         child.receiveShadow = true;
       }
     });
   }
 
   setAmbientLight() {
-    this.ambientLight = new THREE.AmbientLight("#ffffff", 2);
+    this.ambientLight = new THREE.AmbientLight("#ffffff", 3);
     this.scene.add(this.ambientLight);
 
     // Debug
@@ -52,7 +55,9 @@ export default class Environment {
   setSunLight() {
     this.sunLight = new THREE.SpotLight("#ffffff", 1000, 0, undefined, 0.5);
     this.sunLight.position.set(0, 15, 0);
-    this.sunLight.shadow.camera.far = 15;
+    this.sunLight.shadow.mapSize.set(1024, 1024);
+    this.sunLight.shadow.normalBias = 0.05;
+    this.sunLight.shadow.camera.far = 50;
     this.sunLight.castShadow = true;
     // this.scene.add(new THREE.SpotLightHelper(this.sunLight));
     this.scene.add(this.sunLight);
@@ -100,5 +105,10 @@ export default class Environment {
         .step(0.001)
         .onChange(this.environmentMap.updateMaterials);
     }
+  }
+
+  setFog() {
+    this.scene.fog = new THREE.Fog("#87CEEB", 20, 45);
+    this.scene.fog;
   }
 }

@@ -10,6 +10,7 @@ import Resources from "./Utils/Resources.js";
 import AudioController from "./AudioController.js";
 
 import sources from "./sources.js";
+import Intro from "./Intro.js";
 
 let instance = null;
 
@@ -27,11 +28,12 @@ export default class Experience {
     // Options
     this.canvas = _canvas;
 
-    // Setup
+    // Setup // ! Lookout for the order
     this.debug = new Debug();
     this.sizes = new Sizes();
     this.time = new Time();
     this.scene = new THREE.Scene();
+    this.intro = new Intro();
     this.resources = new Resources(sources);
     this.camera = new Camera();
     this.renderer = new Renderer();

@@ -42,7 +42,6 @@ export default class AudioController {
       mainSong.play(); // ! When the song ends, play again
     });
     mainSong.load(); // ? Start loading the audio.
-    mainSong.play(); // ? Automatically start playing the audio.
 
     // Increase/Decrease volume gradually in the start & end
     // Define the rate at which the volume changes (e.g., 0.02 per 100 milliseconds).
