@@ -6,6 +6,7 @@
 html,
 body {
     overflow: hidden;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .webgl {
@@ -13,6 +14,27 @@ body {
     top: 0;
     left: 0;
     outline: none;
+}
+
+.loading-text {
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    z-index: 999;
+    font-size: 2rem;
+
+    left: 50%;
+    top: 45%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.loading-text.ended {
+    opacity: 0;
+    transition: 1.5s ease-in-out;
 }
 
 .loading-bar {
@@ -29,6 +51,33 @@ body {
 }
 
 .loading-bar.ended {
-    transform-origin: top right;
-    transition: transform 1.5s ease-in-out;
+    opacity: 0;
+    transition: 1.5s ease-in-out;
+}
+
+.start-button {
+    position: absolute;
+    z-index: 999;
+    padding: 12px 16px;
+    font-size: 3rem;
+    border: 6px solid white;
+    cursor: pointer;
+    background: none;
+    color: white;
+
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    transition: 0.5s ease-in-out;
+}
+
+.start-button.ended {
+    opacity: 0;
+    transform: translateX(6px);
+    transition: 0.5s ease-in-out;
 }
