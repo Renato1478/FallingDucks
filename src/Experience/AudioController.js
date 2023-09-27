@@ -35,26 +35,25 @@ export default class AudioController {
   setMainSong() {
     // Create an Audio object and provide the URL to your audio file.
     this.mainSong = new Audio("songs/song-of-little-ducks.mp3"); // Music by AudioCoffee (@audiocoffeemusic) | Link: https://pixabay.com/music/happy-childrens-tunes-song-of-little-ducks-113996/
-    let mainSong = this.mainSong;
-    mainSong.volume = 0;
+    this.mainSong.volume = 0.5;
 
-    mainSong.addEventListener("ended", function () {
-      mainSong.play(); // ! When the song ends, play again
+    this.mainSong.addEventListener("ended", () => {
+      this.mainSong.play(); // ! When the song ends, play again
     });
-    mainSong.load(); // ? Start loading the audio.
+    this.mainSong.load(); // ? Start loading the audio.
 
     // Increase/Decrease volume gradually in the start & end
     // Define the rate at which the volume changes (e.g., 0.02 per 100 milliseconds).
     const volumeChangeRate = 0.02;
     const intervalDuration = 100; // 100 milliseconds
     let decreaseInterval, increaseInterval;
-    mainSong.addEventListener("play", function () {
-      let originalVolume = mainSong.volume;
-      mainSong.volume = 0;
+    this.mainSong.addEventListener("play", () => {
+      let originalVolume = this.mainSong.volume;
+      this.mainSong.volume = 0;
       clearInterval(decreaseInterval);
       increaseInterval = setInterval(() => {
         increaseVolume(
-          mainSong,
+          this.mainSong,
           volumeChangeRate,
           increaseInterval,
           originalVolume
@@ -65,11 +64,15 @@ export default class AudioController {
     // Debug
     if (this.debug.active) {
       this.debugFolder
-        .add(mainSong, "volume")
+        .add(this.mainSong, "volume")
         .name("mainSongVolume")
         .min(0)
         .max(1)
         .step(0.001);
     }
+  }
+
+  playMainSong() {
+    this.mainSong.play();
   }
 }
