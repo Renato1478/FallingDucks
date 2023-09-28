@@ -63,7 +63,7 @@ export default class Intro {
     this.loadingContainerElement.classList.add("loading-container");
     document.body.appendChild(this.loadingContainerElement);
 
-    // text
+    // percentage
     this.loadingTextElement = document.createElement("h2");
     this.loadingTextElement.classList.add("loading-text");
     this.loadingTextElement.innerHTML = "0%";
@@ -73,6 +73,11 @@ export default class Intro {
     this.loadingBarElement = document.createElement("div");
     this.loadingBarElement.classList.add("loading-bar");
     this.loadingContainerElement.appendChild(this.loadingBarElement);
+
+    // caption
+    const loadingCaption = document.createElement("span");
+    this.loadingContainerElement.appendChild(loadingCaption);
+    loadingCaption.innerHTML = "Loading your experience...";
   };
 
   removeLoadingInfo = () => {
@@ -82,23 +87,23 @@ export default class Intro {
     });
   };
 
-  setStartButtonElement = () => {
+  setIntro = () => {
     // Criar a div de classe 'intro-container'
-    this.introContainerElement = document.createElement("div");
-    this.introContainerElement.classList.add("loading-container");
-    document.body.appendChild(this.introContainerElement);
-
+    this.introContainerElement = document.querySelector(".intro-container");
+    this.introContainerElement.classList.remove("d-none");
     this.startButtonElement = document.createElement("button");
     this.startButtonElement.classList.add("start-button");
     this.startButtonElement.innerHTML = "QUACK!";
     this.startButtonElement.onclick = () => {
+      this.introContainerElement.classList.add("ended");
       this.startButtonElement.classList.add("clicked");
       gsap.delayedCall(0.5, () => {
         this.introContainerElement.style.display = "none";
       });
-
-      this.experience.audioController.playMainSong();
       this.removeOverlay();
+
+      // Set experience to starting mode
+      this.experience.start();
     };
     this.introContainerElement.appendChild(this.startButtonElement);
   };
@@ -113,7 +118,7 @@ export default class Intro {
     gsap.delayedCall(0.5, () => {
       this.removeLoadingInfo();
       gsap.delayedCall(0.5, () => {
-        this.setStartButtonElement();
+        this.setIntro();
       });
     });
   };

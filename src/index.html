@@ -7,14 +7,29 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div class="intro-container">
+    <div class="intro-container d-none">
       <img src="images/logo.png" alt="Falling Ducks Logo" />
-      <ul class="guide">
-        <li><b>Space (hold)</b> - Prepare to Jump</li>
-        <li><b>Space (Release)</b> - Jump</li>
-        <li><b>A</b> - Move Left</li>
-        <li><b>D</b> - Nove Right</li>
-      </ul>
+      <table class="guide">
+        <caption>
+          Key Guides
+        </caption>
+        <tr>
+          <td>Space (hold)</td>
+          <td>Prepare to Jump</td>
+        </tr>
+        <tr>
+          <td>Space (Release)</td>
+          <td>Jump</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>Move Left</td>
+        </tr>
+        <tr>
+          <td>D</td>
+          <td>Move Right</td>
+        </tr>
+      </table>
     </div>
     <canvas class="webgl"></canvas>
     <script type="module" src="./script.js"></script>

@@ -47,23 +47,27 @@ export default class Camera {
     this.scene.add(this.instance);
   }
 
+  resume() {
+    this.controls.enableRotate = true; // Can rotate
+    this.controls.enableZoom = true; // Can zoom
+    this.controls.enablePan = true; // Can move
+  }
+
+  pause() {
+    this.controls.enableRotate = false; // Cant rotate
+    this.controls.enableZoom = false; // Cant zoom
+    this.controls.enablePan = false; // Cant move
+  }
+
   setControls() {
     this.controls = new OrbitControls(this.instance, this.canvas);
-    this.controls.enableDamping = true;
+    this.controls.enableDamping = true; // For smoothness movement
+    this.pause();
     // Zoom
     this.controls.minZoom = 75;
     this.controls.maxZoom = 90;
     this.controls.zoomSpeed = 0.2;
     // Rotate
-    // this.controls.maxAzimuthAngle = Math.PI;
-    // this.controls.minAzimuthAngle = Math.PI;
-    // this.controls.enablePan = false;
-
-    // this.controls.mouseButtons = {
-    //   LEFT: THREE.MOUSE.ROTATE,
-    //   MIDDLE: THREE.MOUSE.DOLLY,
-    //   RIGHT: THREE.MOUSE.ROTATE,
-    // };
     this.controls.rotateSpeed = 0.05;
   }
 

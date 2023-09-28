@@ -25,6 +25,9 @@ export default class Experience {
     // Global access
     window.experience = this;
 
+    // Game Status
+    this.gameStatus = "paused";
+
     // Options
     this.canvas = _canvas;
 
@@ -49,6 +52,18 @@ export default class Experience {
     this.time.on("tick", () => {
       this.update();
     });
+  }
+
+  start() {
+    this.gameStatus = "resumed";
+    this.camera.resume();
+    // Start the song
+    this.audioController.playMainSong();
+  }
+
+  pause() {
+    this.gameStatus = "paused";
+    this.camera.pause();
   }
 
   resize() {
