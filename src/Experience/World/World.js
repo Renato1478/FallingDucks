@@ -23,7 +23,7 @@ export default class World {
      */
     // World
     this.physicsWorld = new CANNON.World();
-    this.physicsWorld.broadphase = new CANNON.SAPBroadphase(this.world);
+    this.physicsWorld.broadphase = new CANNON.SAPBroadphase(this.physicsWorld);
     this.physicsWorld.allowSleep = true;
     this.physicsWorld.gravity.set(0, -0.982, 0);
 

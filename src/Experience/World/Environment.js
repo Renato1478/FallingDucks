@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import Experience from "../Experience.js";
+import Water from "./Water.js";
 
 export default class Environment {
   constructor() {
@@ -7,6 +8,8 @@ export default class Environment {
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
     this.debug = this.experience.debug;
+    this.world = this.experience.world;
+    this.water = new Water();
 
     // Debug
     if (this.debug.active) {
