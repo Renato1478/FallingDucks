@@ -3,36 +3,26 @@ import Experience from "../Experience.js";
 import * as CANNON from "cannon-es";
 
 export default class Water {
-  constructor(position) {
+  constructor(id, position, scale) {
     this.experience = new Experience();
+    this.id = id;
     this.scene = this.experience.scene;
     this.debug = this.experience.debug;
     this.world = this.experience.world;
 
     // Debug
     if (this.debug.active) {
-      this.debugFolder = this.debug.ui.addFolder("water");
+      this.debugFolder = this.debug.ui.addFolder(this.id);
     }
 
     // Setup Water Collision
-    this.setWaterCollision(position);
+    this.setWaterCollision(position, scale);
   }
 
-  setWaterCollision(position) {
+  setWaterCollision(position, scale) {
     this.parameters = {
-      scale: {
-        x: 10,
-        y: 10,
-        z: 1,
-      },
-      position: {
-        x: -7.45,
-        y: -1.5,
-        z: -1.5,
-      },
-      // position: {
-        
-      // };
+      scale: scale,
+      position: position,
     };
 
     /**
@@ -84,22 +74,22 @@ export default class Water {
       // Sizes & Dimensions
       this.debugFolder
         .add(this.parameters.position, "x")
-        .min(-10)
-        .max(10)
+        .min(-100)
+        .max(100)
         .step(0.01)
         .name("X Position")
         .onChange(onChangePosition);
       this.debugFolder
         .add(this.parameters.position, "y")
-        .min(-10)
-        .max(10)
+        .min(-100)
+        .max(100)
         .step(0.01)
         .name("Y Position")
         .onChange(onChangePosition);
       this.debugFolder
         .add(this.parameters.position, "z")
-        .min(-10)
-        .max(10)
+        .min(-100)
+        .max(100)
         .step(0.01)
         .name("Z Position")
         .onChange(onChangePosition);

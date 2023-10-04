@@ -9,7 +9,36 @@ export default class Environment {
     this.resources = this.experience.resources;
     this.debug = this.experience.debug;
     this.world = this.experience.world;
-    this.water = new Water();
+    this.water = new Water(
+      "topWater",
+      {
+        // Position
+        x: -17.45,
+        y: -1.5,
+        z: -1.5,
+      },
+      {
+        // Scale
+        x: 30,
+        y: 10,
+        z: 1,
+      }
+    );
+    this.water = new Water(
+      "bottomWater",
+      {
+        // Position
+        x: 9,
+        y: -4,
+        z: -1.5,
+      },
+      {
+        // Scale
+        x: 30,
+        y: 10,
+        z: 1,
+      }
+    );
 
     // Debug
     if (this.debug.active) {

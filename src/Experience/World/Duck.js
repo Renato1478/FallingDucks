@@ -3,7 +3,7 @@ import Experience from "../Experience.js";
 import { createPhysicsBox } from "../Utils/CannonUtils.js";
 
 export default class Duck {
-  constructor() {
+  constructor(position, model = null) {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.resources = this.experience.resources;
@@ -19,28 +19,38 @@ export default class Duck {
     // Resource
     this.resource = this.resources.items.duckModel;
 
-    this.setModel();
+    this.setModel(position, model);
     // this.setAnimation()
   }
 
-  setModel() {
+  setModel(position, model = null) {
     this.parameters = {
       scale: {
         x: 0.65,
         y: 0.65,
         z: 0.65,
       },
-      position: {
-        x: -6,
-        y: -1.5 + 0.65,
-        z: -4,
-      },
+      position: position,
     };
+
+    /**
+     * Cannon.js body
+     */
+    const [width, height, depth] = [1, 0.1, 0.9];
+    const { shape, body } = createPhysicsBox(
+      width,
+      height,
+      depth,
+      this.parameters.position,
+      this.world.physicsWorld.defaultMaterial
+    );
+    body.allowSleep = false;
+    this.world.physicsWorld.addBody(body);
 
     /**
      * Three.js model
      */
-    this.model = this.resource.scene;
+    this.model = model ?? this.resource.scene;
     this.model.scale.set(
       this.parameters.scale.x,
       this.parameters.scale.y,
@@ -58,19 +68,6 @@ export default class Duck {
       }
     });
 
-    /**
-     * Cannon.js body
-     */
-    const [width, height, depth] = [1, 0.1, 0.9];
-    const { shape, body } = createPhysicsBox(
-      width,
-      height,
-      depth,
-      this.parameters.position,
-      this.world.physicsWorld.defaultMaterial
-    );
-    body.allowSleep = false;
-    this.world.physicsWorld.addBody(body);
     // Save in objects to update
     this.world.objectsToUpdate.push({
       mesh: this.model,
@@ -119,5 +116,30 @@ export default class Duck {
 
   update() {
     // this.animation.mixer.update(this.time.delta * 0.001)
+  }
+
+  destroy() {
+    // Debug
+    if (this.debug.active) {
+      this.debugFolder.destroy();
+    }
+
+    // Traverse the whole scene
+    this.model.traverse((child) => {
+      // Test if it's a mesh
+      if (child instanceof THREE.Mesh) {
+        child.geometry.dispose();
+
+        // Loop through the material properties
+        for (const key in child.material) {
+          const value = child.material[key];
+
+          // Test if there is a dispose function
+          if (value && typeof value.dispose === "function") {
+            value.dispose();
+          }
+        }
+      }
+    });
   }
 }
