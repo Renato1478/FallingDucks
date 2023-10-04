@@ -37,8 +37,8 @@ export default class World {
       defaultMaterial,
       defaultMaterial,
       {
-        friction: 0.1,
-        restitution: 0.7,
+        friction: 0.4,
+        restitution: 0.2,
       }
     );
     this.physicsWorld.addContactMaterial(defaultContactMaterial);
