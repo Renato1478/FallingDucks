@@ -99,6 +99,10 @@ export default class Intro {
       this.startButtonElement.classList.add("clicked");
       gsap.delayedCall(0.5, () => {
         this.introContainerElement.style.display = "none";
+
+        document
+          .getElementById("in-game-interface-container")
+          .classList.remove("d-none");
       });
       this.removeOverlay();
 

@@ -31,7 +31,136 @@
         </tr>
       </table>
     </div>
+    <div id="in-game-interface-container" class="in-game-container d-none">
+      <!-- Logo and infos -->
+      <div class="header">
+        <img src="images/logo.png" alt="Falling Ducks Logo" />
+        <div>
+          <div class="portfolio">
+            by
+            <a
+              href="https://renatoperes.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Renato Peres</a
+            >
+          </div>
+          <a
+            href="https://threejs-journey.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >THREEJS JOURNEY CHALLENGE</a
+          >
+        </div>
+      </div>
+      <!-- Pause / Song -->
+      <div class="menu">
+        <button id="guide-button" type="button">Guide</button>
+        <button id="credits-button" type="button">Credits</button>
+        <button id="music-button" type="button">Toggle music</button>
+      </div>
+      <!-- Dialogs -->
+      <!-- Modal for Guide -->
+      <div id="guide-modal" class="modal d-none">
+        <div class="modal-content">
+          <!-- Conteúdo do guia aqui -->
+          <h2>Game Guide</h2>
+          <table class="guide">
+            <caption>
+              Key Guides
+            </caption>
+            <tr>
+              <td>Space (hold)</td>
+              <td>Prepare to Jump</td>
+            </tr>
+            <tr>
+              <td>Space (Release)</td>
+              <td>Jump</td>
+            </tr>
+            <tr>
+              <td>A</td>
+              <td>Move Left</td>
+            </tr>
+            <tr>
+              <td>D</td>
+              <td>Move Right</td>
+            </tr>
+          </table>
+          <button
+            id="close-guide-button"
+            type="button"
+            style="margin-top: 2rem"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal for Credits -->
+      <div id="credits-modal" class="modal d-none">
+        <div class="modal-content">
+          <!-- Conteúdo dos créditos aqui -->
+          <h2>Credits</h2>
+          <ul>
+            <li>
+              Music by
+              <a
+                href="https://pixabay.com/music/happy-childrens-tunes-song-of-little-ducks-113996/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >AudioCoffee (@audiocoffeemusic)</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://skfb.ly/oAr9O"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Little Farm House</a
+              >
+              by HugoMFerreira
+            </li>
+          </ul>
+          <button
+            id="close-credits-button"
+            type="button"
+            style="margin-top: 2rem"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
     <canvas class="webgl"></canvas>
     <script type="module" src="./script.js"></script>
+    <script>
+      // JavaScript para manipular os modais
+      const guideButton = document.getElementById("guide-button");
+      const creditsButton = document.getElementById("credits-button");
+
+      const guideModal = document.getElementById("guide-modal");
+      const creditsModal = document.getElementById("credits-modal");
+
+      const closeGuideButton = document.getElementById("close-guide-button");
+      const closeCreditsButton = document.getElementById(
+        "close-credits-button"
+      );
+
+      guideButton.addEventListener("click", () => {
+        guideModal.classList.remove("d-none");
+      });
+
+      creditsButton.addEventListener("click", () => {
+        creditsModal.classList.remove("d-none");
+      });
+
+      closeGuideButton.addEventListener("click", () => {
+        guideModal.classList.add("d-none");
+      });
+
+      closeCreditsButton.addEventListener("click", () => {
+        creditsModal.classList.add("d-none");
+      });
+    </script>
   </body>
 </html>

@@ -35,7 +35,7 @@ export default class AudioController {
   setMainSong() {
     // Create an Audio object and provide the URL to your audio file.
     this.mainSong = new Audio("songs/song-of-little-ducks.mp3"); // Music by AudioCoffee (@audiocoffeemusic) | Link: https://pixabay.com/music/happy-childrens-tunes-song-of-little-ducks-113996/
-    this.mainSong.volume = 0.1;
+    this.mainSong.volume = 0.2;
 
     this.mainSong.addEventListener("ended", () => {
       this.mainSong.play(); // ! When the song ends, play again
@@ -73,6 +73,15 @@ export default class AudioController {
   }
 
   playMainSong() {
-    // this.mainSong.play(); # uncomment for music
+    this.mainSong.play();
+
+    document.getElementById("music-button").addEventListener("click", () => {
+      console.log("toggle music");
+      if (this.mainSong.paused) {
+        this.mainSong.play();
+      } else {
+        this.mainSong.pause();
+      }
+    });
   }
 }
