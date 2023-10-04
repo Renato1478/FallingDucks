@@ -44,7 +44,7 @@ export default class Player {
     this.deactivatedDucks.push(this.duck);
 
     this.duck = new Duck(INITIAL_POSITION, this.duck.model.clone());
-    this.currentLinePosIndex = 0; // Index of current line
+    this.currentLinePosIndex = 2; // Index of current line
     this.isGrounded = true; // Flag para verificar se o jogador está no ar
     this.jumpPower = 0; // Força do salto
     this.isChargingJump = false; // Flag para verificar se esta carregando pulo
@@ -79,6 +79,8 @@ export default class Player {
 
   // Método para mover para a direita
   moveRight() {
+    if (this.isMoving || !this.isGrounded) return;
+
     if (this.currentLinePosIndex == this.linePosArr.length - 1) return;
     else {
       this.startedMoving = true;
@@ -88,6 +90,8 @@ export default class Player {
 
   // Método para mover para a esquerda
   moveLeft() {
+    if (this.isMoving || !this.isGrounded) return;
+
     if (this.currentLinePosIndex == 0) return;
     else {
       this.startedMoving = true;
@@ -109,14 +113,12 @@ export default class Player {
 
   // Method to smoothly animate the z position
   animateZPosition(targetZ) {
-    console.log("started animation!");
     this.zPositionTimeline.clear(); // Clear any previous animations
     this.zPositionTimeline.to(this.duck.physicsObject.body.position, {
       duration: 0.3, // Duration of the animation (adjust as needed)
       z: targetZ, // Target z position
       ease: "power1.inOut", // Easing function for smooth animation
     });
-    console.log("finished moving and anim!");
     this.isMoving = false;
   }
 
