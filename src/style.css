@@ -88,9 +88,10 @@ body {
     margin-top: 4rem;
     font-size: 3rem;
     border: 6px solid white;
+    border-radius: 12px;
     color: #fff;
     cursor: pointer;
-    background: none;
+    background-color: orange;
     transition: transform 250ms ease-in-out;
 }
 

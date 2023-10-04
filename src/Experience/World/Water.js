@@ -3,7 +3,7 @@ import Experience from "../Experience.js";
 import * as CANNON from "cannon-es";
 
 export default class Water {
-  constructor() {
+  constructor(position) {
     this.experience = new Experience();
     this.scene = this.experience.scene;
     this.debug = this.experience.debug;
@@ -15,10 +15,10 @@ export default class Water {
     }
 
     // Setup Water Collision
-    this.setWaterCollision();
+    this.setWaterCollision(position);
   }
 
-  setWaterCollision() {
+  setWaterCollision(position) {
     this.parameters = {
       scale: {
         x: 10,
@@ -30,6 +30,9 @@ export default class Water {
         y: -1.5,
         z: -1.5,
       },
+      // position: {
+        
+      // };
     };
 
     /**

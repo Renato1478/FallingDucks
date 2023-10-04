@@ -3,7 +3,7 @@ import * as CANNON from "cannon-es";
 
 import Experience from "../Experience.js";
 import Environment from "./Environment.js";
-import Duck from "./Duck.js";
+import Player from "../Player.js";
 
 export default class World {
   constructor() {
@@ -14,7 +14,7 @@ export default class World {
     // Wait for resources
     this.resources.on("ready", () => {
       // Setup
-      this.duck = new Duck();
+      this.player = new Player();
       this.environment = new Environment();
     });
 
@@ -25,7 +25,7 @@ export default class World {
     this.physicsWorld = new CANNON.World();
     this.physicsWorld.broadphase = new CANNON.SAPBroadphase(this.physicsWorld);
     this.physicsWorld.allowSleep = true;
-    this.physicsWorld.gravity.set(0, -0.982, 0);
+    this.physicsWorld.gravity.set(0, -9.82, 0);
 
     // Objects to update
     this.objectsToUpdate = [];
@@ -65,8 +65,8 @@ export default class World {
         object.mesh.quaternion.copy(object.body.quaternion);
       }
 
-      if (this.duck) {
-        this.duck.update();
+      if (this.player) {
+        this.player.update();
       }
     }
   }

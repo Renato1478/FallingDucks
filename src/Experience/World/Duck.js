@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import Experience from "../Experience.js";
-import * as CANNON from "cannon-es";
 import { createPhysicsBox } from "../Utils/CannonUtils.js";
 
 export default class Duck {
@@ -70,6 +69,7 @@ export default class Duck {
       this.parameters.position,
       this.world.physicsWorld.defaultMaterial
     );
+    body.allowSleep = false;
     this.world.physicsWorld.addBody(body);
     // Save in objects to update
     this.world.objectsToUpdate.push({
@@ -116,59 +116,6 @@ export default class Duck {
         .name("showColliderWireframe");
     }
   }
-
-  // setAnimation() {
-  //   this.animation = {};
-
-  //   // Mixer
-  //   this.animation.mixer = new THREE.AnimationMixer(this.model);
-
-  //   // Actions
-  //   this.animation.actions = {};
-
-  //   this.animation.actions.idle = this.animation.mixer.clipAction(
-  //     this.resource.animations[0]
-  //   );
-  //   this.animation.actions.walking = this.animation.mixer.clipAction(
-  //     this.resource.animations[1]
-  //   );
-  //   this.animation.actions.running = this.animation.mixer.clipAction(
-  //     this.resource.animations[2]
-  //   );
-
-  //   this.animation.actions.current = this.animation.actions.idle;
-  //   this.animation.actions.current.play();
-
-  //   // Play the action
-  //   this.animation.play = (name) => {
-  //     const newAction = this.animation.actions[name];
-  //     const oldAction = this.animation.actions.current;
-
-  //     newAction.reset();
-  //     newAction.play();
-  //     newAction.crossFadeFrom(oldAction, 1);
-
-  //     this.animation.actions.current = newAction;
-  //   };
-
-  //   // Debug
-  //   if (this.debug.active) {
-  //     const debugObject = {
-  //       playIdle: () => {
-  //         this.animation.play("idle");
-  //       },
-  //       playWalking: () => {
-  //         this.animation.play("walking");
-  //       },
-  //       playRunning: () => {
-  //         this.animation.play("running");
-  //       },
-  //     };
-  //     this.debugFolder.add(debugObject, "playIdle");
-  //     this.debugFolder.add(debugObject, "playWalking");
-  //     this.debugFolder.add(debugObject, "playRunning");
-  //   }
-  // }
 
   update() {
     // this.animation.mixer.update(this.time.delta * 0.001)
