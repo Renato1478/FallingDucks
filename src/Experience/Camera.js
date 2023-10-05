@@ -50,7 +50,7 @@ export default class Camera {
   resume() {
     this.controls.enableRotate = true; // Can rotate
     this.controls.enableZoom = true; // Can zoom
-    this.controls.enablePan = true; // Can move
+    this.controls.enablePan = false; // Can move
   }
 
   pause() {
@@ -69,6 +69,11 @@ export default class Camera {
     this.controls.zoomSpeed = 0.2;
     // Rotate
     this.controls.rotateSpeed = 0.05;
+    // Lock rotation around the object
+    this.controls.minPolarAngle = 1.2; // Minimum allowed polar angle (in radians)
+    this.controls.maxPolarAngle = 1.4; // Maximum allowed polar angle (in radians)
+    this.controls.minAzimuthAngle = 0.85; // Minimum allowed azimuthal angle (in radians)
+    this.controls.maxAzimuthAngle = 1.25; // Maximum allowed azimuthal angle (in radians)
   }
 
   resize() {
@@ -82,8 +87,5 @@ export default class Camera {
 
   update() {
     this.controls.update();
-
-    // console.log(this.instance.position);
-    // console.log(this.instance.quaternion);
   }
 }
